@@ -10,9 +10,6 @@ import model.Restaurant;
 
 //display for each restaurant in the scrollable list
 public class RestaurantCellRenderer extends JPanel implements ListCellRenderer<Restaurant>{
-
-
-
     
     @Override
     public Component getListCellRendererComponent(JList<? extends Restaurant> list, Restaurant value, int index,
