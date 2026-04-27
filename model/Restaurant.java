@@ -1,10 +1,15 @@
 package model;
 
-public class Restaurant {
+//import java.util;
+
+public class Restaurant implements Comparable<Restaurant> {
 
     private String name;
     private String location;
     private String cuisine;
+
+    private double rating;
+    private String review;
     
     public Restaurant(String _name, String _location, String _cuisine){
         this.name = _name;
@@ -32,5 +37,10 @@ public class Restaurant {
 
     public void editCuisine(String _newCuisine) {
         this.cuisine = _newCuisine;
+    }
+
+    @Override // alphabetical order
+    public int compareTo(Restaurant _res) {
+        return this.name.compareTo(_res.name);
     }
 }
