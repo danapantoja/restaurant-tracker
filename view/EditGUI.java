@@ -39,19 +39,19 @@ public class EditGUI extends JFrame{
 
         //add edit restaurant name 
         nameLbl = new JLabel("Edit Name");
-        nameField = new JTextField(14);
+        nameField = new JTextField(restaurant.getName());
         mainPanel.add(nameLbl);
         mainPanel.add(nameField);
         
         // edit restaurant location
         locationLbl = new JLabel("Edit Location");
-        locationField = new JTextField();
+        locationField = new JTextField(restaurant.getLocation());
         mainPanel.add(locationLbl);
         mainPanel.add(locationField);
 
         //edit restaurant food type
         foodLbl = new JLabel("Edit Food Type");
-        foodField = new JTextField();
+        foodField = new JTextField(restaurant.getCuisine());
         mainPanel.add(foodLbl);
         mainPanel.add(foodField);
 

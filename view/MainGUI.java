@@ -21,7 +21,7 @@ public class MainGUI extends JFrame{
         //create new panes from custom classes
         tabbedPane = new JTabbedPane();
         visitedPanel = new VisitedPanel(new RestaurantManager());
-        wantToVisitPanel = new WantToVisitPanel();
+        wantToVisitPanel = new WantToVisitPanel(new RestaurantManager());
 
         //add to main gui
         tabbedPane.addTab("Visited", visitedPanel);

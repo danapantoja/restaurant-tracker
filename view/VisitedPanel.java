@@ -10,6 +10,7 @@ public class VisitedPanel extends JPanel{
     private JButton editBtn;
     private JButton deleteBtn;
     private JButton searchBtn;
+    private JTextField searchField;
     private JList<Restaurant> restaurantList;
     private DefaultListModel<Restaurant> listModel;
 
@@ -17,10 +18,23 @@ public class VisitedPanel extends JPanel{
 
     public VisitedPanel(RestaurantManager manager){
         this.manager = manager;
+        setLayout(new BorderLayout());
 
-        //add search functionality (on keystroke ? maybe, or just add search button)
+    
+        //add search functionality 
+        searchField = new JTextField(20);
+        searchBtn = new JButton("Search");
+
+        JPanel topPanel = new JPanel();
+        topPanel.add(new JLabel("Search:"));
+        topPanel.add(searchField);
+        topPanel.add(searchBtn);
+
+        add(topPanel, BorderLayout.NORTH);
     
         //list of restaurants here scrollable (use restuaurant cell renderer)
+        listModel = new DefaultListModel<>();
+
 
 
         //---bottom button panel---
