@@ -14,7 +14,7 @@ public class Restaurant implements Comparable<Restaurant> {
     public Restaurant(String _name, String _location, String _cuisine){
         this.name = _name;
         this.location = _location;
-        this.cuisine = _location;
+        this.cuisine = _cuisine;
     }
 
     public String getName() {
@@ -25,6 +25,12 @@ public class Restaurant implements Comparable<Restaurant> {
     }
     public String getCuisine() {
         return this.cuisine;
+    }
+    public Double getRating() {
+        return this.rating;
+    }
+    public String getReview() {
+        return this.review;
     }
 
     public void editName(String _newName) {
@@ -37,6 +43,12 @@ public class Restaurant implements Comparable<Restaurant> {
 
     public void editCuisine(String _newCuisine) {
         this.cuisine = _newCuisine;
+    }
+    public void editRating(Double _newRating) {
+        this.rating = _newRating;
+    }
+    public void editReview(String _newReview) {
+        this.review = _newReview;
     }
     
 

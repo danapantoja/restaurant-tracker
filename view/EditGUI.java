@@ -56,15 +56,15 @@ public class EditGUI extends JFrame{
         mainPanel.add(foodField);
 
         //edit rating
-        ratingLbl = new JLabel("Edit Rating");
-        ratingField = new JTextField();
+        ratingLbl = new JLabel("Edit Rating (1-5)");
+        ratingField = new JTextField(String.valueOf(restaurant.getRating()));
         mainPanel.add(ratingLbl);
         mainPanel.add(ratingField);
 
 
         // edit review
         reviewLbl = new JLabel("Edit Review");
-        reviewArea = new JTextArea(5, 20);
+        reviewArea = new JTextArea(restaurant.getReview(), 5, 20);
         mainPanel.add(reviewLbl);
         reviewArea.setLineWrap(true);
         reviewArea.setWrapStyleWord(true);
@@ -99,11 +99,41 @@ public class EditGUI extends JFrame{
     }
     
     public void editRestaurant(){
-        
+
+        double ratingDouble;
+        try {
+            ratingDouble = Double.parseDouble(this.ratingField.getText());
+
+            if (ratingDouble < 1 || ratingDouble > 5) throw new NumberFormatException();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid rating.");
+            return;
+        }
+        restaurant.editName(this.nameField.getText());
+        restaurant.editLocation(this.locationField.getText());
+        restaurant.editCuisine(this.foodField.getText());
+        restaurant.editRating(ratingDouble);
+        restaurant.editReview(this.reviewArea.getText());
+
+        dispose();
+
+
     }
     public void moveRestaurant(){
-        manager.deleteRestaurant(this.manager.getWantToVisit(), this.restaurant);
-        manager.addToVisited(this.restaurant);
+        double ratingDouble;
+
+        try {
+            ratingDouble = Double.parseDouble(this.ratingField.getText());
+            if (ratingDouble < 1 || ratingDouble > 5) throw new NumberFormatException();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid rating.");
+            return;
+        }
+        restaurant.editRating(ratingDouble);
+        restaurant.editReview(this.reviewArea.getText());
+
+        manager.moveToVisited(this.restaurant);
+        dispose();
     }
     
     

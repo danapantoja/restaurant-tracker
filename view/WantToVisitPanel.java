@@ -13,6 +13,7 @@ public class WantToVisitPanel extends JPanel{
     private JButton editBtn;
     private JButton moveBtn;
     private JButton deleteBtn;
+    private JButton refreshBtn;
 
     private JList<Restaurant> restaurantList;
     private DefaultListModel<Restaurant> listModel;
@@ -28,10 +29,13 @@ public class WantToVisitPanel extends JPanel{
             listModel.addElement(r);
         }
         restaurantList = new JList<>(listModel);
-        restaurantList.setCellRenderer(new RestaurantCellRenderer());
+        restaurantList.setCellRenderer(new RestaurantCellRenderer(true));
 
         JScrollPane scrollPane = new JScrollPane(restaurantList);
         add(scrollPane, BorderLayout.CENTER);
+
+        refreshBtn = new JButton("Refresh");
+        refreshBtn.addActionListener(e -> refreshList());
 
     
         //add search functionality on top
@@ -51,6 +55,7 @@ public class WantToVisitPanel extends JPanel{
         topPanel.add(new JLabel("Search:"));
         topPanel.add(searchField);
         topPanel.add(searchBtn);
+        topPanel.add(refreshBtn);
 
         add(topPanel, BorderLayout.NORTH);
     
@@ -64,6 +69,7 @@ public class WantToVisitPanel extends JPanel{
         addBtn.addActionListener(e->{
             
             new AddNewGUI(manager, true);
+            
         });
         editBtn = new JButton ("Edit Restaurant");
 
@@ -77,6 +83,7 @@ public class WantToVisitPanel extends JPanel{
 
             new EditGUI(selected, manager, false);
             listModel.setElementAt(selected, restaurantList.getSelectedIndex());
+            
         });
         moveBtn = new JButton ("Move to Visited");
         moveBtn.addActionListener(e -> {
@@ -89,6 +96,7 @@ public class WantToVisitPanel extends JPanel{
 
             new EditGUI(selected, manager, true);
             listModel.setElementAt(selected, restaurantList.getSelectedIndex());
+           
         });
 
         deleteBtn = new JButton("Delete Restaurant");
@@ -99,8 +107,9 @@ public class WantToVisitPanel extends JPanel{
                 JOptionPane.showMessageDialog(this, "Select a restaurant first.");
                 return;
             }
-            manager.deleteRestaurant(manager.getVisited(), selected);
+            manager.deleteFromWantToVisit(selected);
             listModel.removeElement(selected);
+            refreshList();
         });
 
         bottomPanel.add(addBtn);
@@ -111,6 +120,14 @@ public class WantToVisitPanel extends JPanel{
         revalidate();
         repaint();
         
+    }
+    private void refreshList() {
+        listModel.clear();
+        this.searchField.setText("");
+
+        for (Restaurant r : manager.getWantToVisit()) {
+            listModel.addElement(r);
+        }
     }
     
 }

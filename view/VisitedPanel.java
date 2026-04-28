@@ -13,6 +13,7 @@ public class VisitedPanel extends JPanel{
     private JTextField searchField;
     private JList<Restaurant> restaurantList;
     private DefaultListModel<Restaurant> listModel;
+    private JButton refreshBtn;
 
     private RestaurantManager manager;
 
@@ -27,10 +28,13 @@ public class VisitedPanel extends JPanel{
             listModel.addElement(r);
         }
         restaurantList = new JList<>(listModel);
-        restaurantList.setCellRenderer(new RestaurantCellRenderer());
+        restaurantList.setCellRenderer(new RestaurantCellRenderer(false));
 
         JScrollPane scrollPane = new JScrollPane(restaurantList);
         add(scrollPane, BorderLayout.CENTER);
+
+        refreshBtn = new JButton("Refresh");
+        refreshBtn.addActionListener(e -> refreshList());
 
     
         //add search functionality 
@@ -51,6 +55,7 @@ public class VisitedPanel extends JPanel{
         topPanel.add(new JLabel("Search:"));
         topPanel.add(searchField);
         topPanel.add(searchBtn);
+        topPanel.add(refreshBtn);
 
         add(topPanel, BorderLayout.NORTH);
 
@@ -63,6 +68,7 @@ public class VisitedPanel extends JPanel{
         addBtn = new JButton("Add New Restaurant");
         addBtn.addActionListener(e->{
             new AddNewGUI(manager, false);
+            
         });
         editBtn = new JButton ("Edit Restaurant");
         editBtn.addActionListener(e -> {
@@ -75,6 +81,7 @@ public class VisitedPanel extends JPanel{
 
             new EditGUI(selected, manager, false);
             listModel.setElementAt(selected, restaurantList.getSelectedIndex());
+            
         });
 
         deleteBtn = new JButton("Delete Restaurant");
@@ -85,8 +92,9 @@ public class VisitedPanel extends JPanel{
                 JOptionPane.showMessageDialog(this, "Select a restaurant first.");
                 return;
             }
-            manager.deleteRestaurant(manager.getVisited(), selected);
+            manager.deleteFromVisited(selected);
             listModel.removeElement(selected);
+            refreshList();
         });
 
         bottomPanel.add(addBtn);
@@ -97,6 +105,14 @@ public class VisitedPanel extends JPanel{
         repaint();
 
 
+    }
+    private void refreshList() {
+        listModel.clear();
+        this.searchField.setText("");
+
+        for (Restaurant r : manager.getVisited()) {
+            listModel.addElement(r);
+        }
     }
 
 

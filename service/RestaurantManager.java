@@ -5,23 +5,23 @@ import model.Restaurant;
 
 public class RestaurantManager {
 
-    private ArrayList<Restaurant> visited = new ArrayList<>();
-    private ArrayList<Restaurant> wantToVisit = new ArrayList<>();
+    private ArrayList<Restaurant> visited;
+    private ArrayList<Restaurant> wantToVisit;
     
     public RestaurantManager(){
-        this.visited = visited;
-        this.wantToVisit = wantToVisit;
+        this.visited = new ArrayList<>();
+        this.wantToVisit =  new ArrayList<>();
         
     }
 
     public void addToVisited(Restaurant _res) {
-        visited.add(_res);
-        Collections.sort(visited);
+        this.visited.add(_res);
+        Collections.sort(this.visited);
     }
 
     public void addToWantToVisit(Restaurant _res) {
-        wantToVisit.add(_res);
-        Collections.sort(wantToVisit);
+        this.wantToVisit.add(_res);
+        Collections.sort(this.wantToVisit);
     }
 
     public ArrayList<Restaurant> getVisited(){
@@ -30,13 +30,17 @@ public class RestaurantManager {
     public ArrayList<Restaurant> getWantToVisit(){
         return this.wantToVisit;
     }
-    
 
-
-
-
-    // Restaurant is selected from GUI
-    public void deleteRestaurant(ArrayList<Restaurant> _tab, Restaurant _selected) {
-        _tab.remove(_selected);
+    public void deleteFromVisited( Restaurant _selected) {
+        this.visited.remove(_selected);
     }
+    public void deleteFromWantToVisit( Restaurant _selected) {
+        this.wantToVisit.remove(_selected);
+    }
+
+    public void moveToVisited(Restaurant _selected){
+        this.deleteFromWantToVisit(_selected);
+        this.addToVisited(_selected);
+    }
+
 }
