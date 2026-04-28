@@ -31,7 +31,7 @@ public class EditGUI extends JFrame{
         this.moveToVisited = moveToVisited;
         
         setTitle(moveToVisited ? "Move Restaurant to Visited" : "Edit Restaurant");
-        setSize(600, 400);
+        setSize(700, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         JPanel mainPanel = new JPanel(new GridLayout(0, 2, 2, 0));
@@ -102,7 +102,8 @@ public class EditGUI extends JFrame{
         
     }
     public void moveRestaurant(){
-
+        manager.deleteRestaurant(this.manager.getWantToVisit(), this.restaurant);
+        manager.addToVisited(this.restaurant);
     }
     
     

@@ -38,6 +38,7 @@ public class Restaurant implements Comparable<Restaurant> {
     public void editCuisine(String _newCuisine) {
         this.cuisine = _newCuisine;
     }
+    
 
     @Override // alphabetical order
     public int compareTo(Restaurant _res) {

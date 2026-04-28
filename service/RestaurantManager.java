@@ -9,6 +9,8 @@ public class RestaurantManager {
     private ArrayList<Restaurant> wantToVisit = new ArrayList<>();
     
     public RestaurantManager(){
+        this.visited = visited;
+        this.wantToVisit = wantToVisit;
         
     }
 
@@ -21,6 +23,17 @@ public class RestaurantManager {
         wantToVisit.add(_res);
         Collections.sort(wantToVisit);
     }
+
+    public ArrayList<Restaurant> getVisited(){
+        return this.visited;
+    }
+    public ArrayList<Restaurant> getWantToVisit(){
+        return this.wantToVisit;
+    }
+    
+
+
+
 
     // Restaurant is selected from GUI
     public void deleteRestaurant(ArrayList<Restaurant> _tab, Restaurant _selected) {

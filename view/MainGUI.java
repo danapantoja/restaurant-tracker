@@ -15,7 +15,7 @@ public class MainGUI extends JFrame{
         //title
         setTitle("Restaurant Tracker");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
+        setSize(700, 400);
         setLocationRelativeTo(null);
 
         //create new panes from custom classes
