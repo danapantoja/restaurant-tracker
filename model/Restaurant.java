@@ -1,8 +1,12 @@
 package model;
 
-//import java.util;
+import java.io.Serializable;
 
-public class Restaurant implements Comparable<Restaurant> {
+
+
+//import java.util;
+ 
+public class Restaurant implements Comparable<Restaurant>, Serializable {
 
     private String name;
     private String location;
@@ -10,8 +14,10 @@ public class Restaurant implements Comparable<Restaurant> {
 
     private double rating;
     private String review;
+    private static final long serialVersionUID = 1L;
     
     public Restaurant(String _name, String _location, String _cuisine){
+
         this.name = _name;
         this.location = _location;
         this.cuisine = _cuisine;
@@ -51,9 +57,9 @@ public class Restaurant implements Comparable<Restaurant> {
         this.review = _newReview;
     }
     
-
     @Override // alphabetical order
     public int compareTo(Restaurant _res) {
         return this.name.compareTo(_res.name);
     }
+
 }

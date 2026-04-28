@@ -33,6 +33,8 @@ public class VisitedPanel extends JPanel{
         JScrollPane scrollPane = new JScrollPane(restaurantList);
         add(scrollPane, BorderLayout.CENTER);
 
+
+        //refresh button to display correct list after adding a new restaurant / editing
         refreshBtn = new JButton("Refresh");
         refreshBtn.addActionListener(e -> refreshList());
 

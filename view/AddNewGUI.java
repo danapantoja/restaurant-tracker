@@ -100,7 +100,6 @@ public class AddNewGUI extends JFrame{
     //use wantToVisit to add to specific list
     public void addRestaurant(){
 
-
         if (this.nameField.getText().trim().equals("") || this.locationField.getText().trim().equals("") || this.cuisineField.getText().trim().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter all required fields.");
             return;

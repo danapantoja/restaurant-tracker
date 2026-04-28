@@ -1,26 +1,34 @@
 package service;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import io.FileRepository;
 import model.Restaurant;
 
 public class RestaurantManager {
 
     private ArrayList<Restaurant> visited;
     private ArrayList<Restaurant> wantToVisit;
+    private FileRepository repository;
+    final private String visitedFile = "data/visited.bin";
+    final private String wantToVisitFile = "data/wantToVisit.bin";
     
     public RestaurantManager(){
-        this.visited = new ArrayList<>();
-        this.wantToVisit =  new ArrayList<>();
-        
+        this.repository = new FileRepository();
+        this.visited = repository.loadRestaurants(visitedFile);
+        this.wantToVisit = repository.loadRestaurants(wantToVisitFile);
+
     }
     public void addToVisited(Restaurant _res) {
         this.visited.add(_res);
         Collections.sort(this.visited);
+        saveData();
     }
 
     public void addToWantToVisit(Restaurant _res) {
         this.wantToVisit.add(_res);
         Collections.sort(this.wantToVisit);
+        saveData();
     }
 
     public ArrayList<Restaurant> getVisited(){
@@ -32,31 +40,39 @@ public class RestaurantManager {
 
     public void deleteFromVisited( Restaurant _selected) {
         this.visited.remove(_selected);
+        saveData();
     }
     public void deleteFromWantToVisit( Restaurant _selected) {
         this.wantToVisit.remove(_selected);
+        saveData();
     }
 
     public void moveToVisited(Restaurant _selected){
         this.deleteFromWantToVisit(_selected);
         this.addToVisited(_selected);
+        saveData();
     }
-    public void updateRestaurant(Restaurant restaurant, String name, String location, String cuisine, double rating,
+    public void updateRestaurant(Restaurant _res, String name, String location, String cuisine, double rating,
             String review) {
-        restaurant.editName(name);
-        restaurant.editLocation(location);
-        restaurant.editCuisine(cuisine);
-        restaurant.editRating(rating);
-        restaurant.editReview(review);
+        _res.editName(name);
+        _res.editLocation(location);
+        _res.editCuisine(cuisine);
+        _res.editRating(rating);
+        _res.editReview(review);
+        saveData();
     
         Collections.sort(this.visited);
 
     }
-    public void updateRestaurant(Restaurant restaurant, String name, String location, String cuisine){
-        restaurant.editName(name);
-        restaurant.editLocation(location);
-        restaurant.editCuisine(cuisine);
+    public void updateRestaurant(Restaurant _res, String name, String location, String cuisine){
+        _res.editName(name);
+        _res.editLocation(location);
+        _res.editCuisine(cuisine);
+        saveData();
         Collections.sort(this.wantToVisit);
     }
-
+    private void saveData() {
+        repository.saveRestaurants(visitedFile, visited);
+        repository.saveRestaurants(wantToVisitFile, wantToVisit);
+    }
 }
