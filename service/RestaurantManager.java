@@ -13,7 +13,6 @@ public class RestaurantManager {
         this.wantToVisit =  new ArrayList<>();
         
     }
-
     public void addToVisited(Restaurant _res) {
         this.visited.add(_res);
         Collections.sort(this.visited);

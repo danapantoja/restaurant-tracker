@@ -100,6 +100,11 @@ public class EditGUI extends JFrame{
     
     public void editRestaurant(){
 
+        if (this.nameField.getText().trim().equals("") || this.locationField.getText().trim().equals("") || this.foodField.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(this, "Please enter all required fields.");
+            return;
+        }
+
         double ratingDouble;
         try {
             ratingDouble = Double.parseDouble(this.ratingField.getText());
@@ -120,6 +125,11 @@ public class EditGUI extends JFrame{
 
     }
     public void moveRestaurant(){
+
+        if (this.nameField.getText().trim().equals("") || this.locationField.getText().trim().equals("") || this.foodField.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(this, "Please enter all required fields.");
+            return;
+        }
         double ratingDouble;
 
         try {
