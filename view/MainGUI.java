@@ -1,6 +1,8 @@
 package view;
 import javax.swing.*;
 
+import service.RestaurantManager;
+
 
 public class MainGUI extends JFrame{
 
@@ -13,12 +15,12 @@ public class MainGUI extends JFrame{
         //title
         setTitle("Restaurant Tracker");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(700, 500);
+        setSize(600, 400);
         setLocationRelativeTo(null);
 
         //create new panes from custom classes
         tabbedPane = new JTabbedPane();
-        visitedPanel = new VisitedPanel();
+        visitedPanel = new VisitedPanel(new RestaurantManager());
         wantToVisitPanel = new WantToVisitPanel();
 
         //add to main gui
