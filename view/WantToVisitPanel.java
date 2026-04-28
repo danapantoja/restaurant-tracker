@@ -34,7 +34,7 @@ public class WantToVisitPanel extends JPanel{
         add(scrollPane, BorderLayout.CENTER);
 
     
-        //add search functionality 
+        //add search functionality on top
         searchField = new JTextField(20 );
         searchBtn = new JButton("Search by Name");
         searchField.addActionListener(e -> searchBtn.doClick());
@@ -47,7 +47,6 @@ public class WantToVisitPanel extends JPanel{
                 }
             }
         });
-
         JPanel topPanel = new JPanel();
         topPanel.add(new JLabel("Search:"));
         topPanel.add(searchField);
@@ -56,9 +55,6 @@ public class WantToVisitPanel extends JPanel{
         add(topPanel, BorderLayout.NORTH);
     
         
-
-
-
         //---bottom button panel---
         //add button to add new restaurant gui
         //add edit restuarant functionality when a user clicks on a restaurant and presses edit

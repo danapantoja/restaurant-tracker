@@ -53,9 +53,6 @@ public class VisitedPanel extends JPanel{
         topPanel.add(searchBtn);
 
         add(topPanel, BorderLayout.NORTH);
-    
-        
-
 
 
         //---bottom button panel---

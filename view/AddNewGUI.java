@@ -11,7 +11,7 @@ public class AddNewGUI extends JFrame{
 
     private RestaurantManager manager;
     private boolean wantToVisit;
-    public AddNewGUI(RestaurantManager manager, boolean wantToVist){
+    public AddNewGUI(RestaurantManager manager, boolean wantToVisit){
         this.manager = manager;
         this.wantToVisit = wantToVisit;
 
@@ -22,8 +22,6 @@ public class AddNewGUI extends JFrame{
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         JPanel mainPanel = new JPanel(new GridLayout(0, 2, 2, 0));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(25, 35, 25, 35));
-
-
 
 
 
