@@ -9,12 +9,13 @@ import service.RestaurantManager;
 public class EditGUI extends JFrame{
     
     private boolean moveToVisited;
+    private boolean fromWantToVisit;
     private JTextField nameField;
     private JLabel nameLbl;
     private JTextField locationField;
     private JLabel locationLbl;
-    private JTextField foodField;
-    private JLabel foodLbl;
+    private JTextField cuisineField;
+    private JLabel cuisineLbl;
     private JTextField ratingField;
     private JLabel ratingLbl;
     private JTextArea reviewArea;
@@ -25,10 +26,11 @@ public class EditGUI extends JFrame{
     private Restaurant restaurant;
     private RestaurantManager manager;
 
-    public EditGUI(Restaurant restaurant, RestaurantManager manager, boolean moveToVisited){
+    public EditGUI(Restaurant restaurant, RestaurantManager manager, boolean moveToVisited, boolean fromWantToVisit){
         this.restaurant = restaurant;
         this.manager = manager;
         this.moveToVisited = moveToVisited;
+        this.fromWantToVisit = fromWantToVisit;
         
         setTitle(moveToVisited ? "Move Restaurant to Visited" : "Edit Restaurant");
         setSize(700, 400);
@@ -49,27 +51,30 @@ public class EditGUI extends JFrame{
         mainPanel.add(locationLbl);
         mainPanel.add(locationField);
 
-        //edit restaurant food type
-        foodLbl = new JLabel("Edit Food Type");
-        foodField = new JTextField(restaurant.getCuisine());
-        mainPanel.add(foodLbl);
-        mainPanel.add(foodField);
+        //edit restaurant cuisine type
+        cuisineLbl = new JLabel("Edit Cuisine Type");
+        cuisineField = new JTextField(restaurant.getCuisine());
+        mainPanel.add(cuisineLbl);
+        mainPanel.add(cuisineField);
 
         //edit rating
-        ratingLbl = new JLabel("Edit Rating (1-5)");
-        ratingField = new JTextField(String.valueOf(restaurant.getRating()));
-        mainPanel.add(ratingLbl);
-        mainPanel.add(ratingField);
+        if (!this.fromWantToVisit){
+            ratingLbl = new JLabel("Edit Rating (1-5)");
+            ratingField = new JTextField(String.valueOf(restaurant.getRating()));
+            mainPanel.add(ratingLbl);
+            mainPanel.add(ratingField);
 
 
-        // edit review
-        reviewLbl = new JLabel("Edit Review");
-        reviewArea = new JTextArea(restaurant.getReview(), 5, 20);
-        mainPanel.add(reviewLbl);
-        reviewArea.setLineWrap(true);
-        reviewArea.setWrapStyleWord(true);
-        mainPanel.add(new JScrollPane(reviewArea));
+            // edit review
+            reviewLbl = new JLabel("Edit Review");
+            reviewArea = new JTextArea(restaurant.getReview(), 5, 20);
+            mainPanel.add(reviewLbl);
+            reviewArea.setLineWrap(true);
+            reviewArea.setWrapStyleWord(true);
+            mainPanel.add(new JScrollPane(reviewArea));
 
+        }
+        
 
         // submit edit
         submitBtn = new JButton(this.moveToVisited ? "Move" : "Submit");
@@ -80,7 +85,6 @@ public class EditGUI extends JFrame{
                 editRestaurant();
             }
         });
-
         //back to main
         backBtn = new JButton("Back");
         backBtn.addActionListener(e -> dispose());
@@ -94,39 +98,37 @@ public class EditGUI extends JFrame{
         add(mainPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
         setVisible(true);
-        
-
     }
-    
     public void editRestaurant(){
-
-        if (this.nameField.getText().trim().equals("") || this.locationField.getText().trim().equals("") || this.foodField.getText().trim().equals("")){
+        if (this.nameField.getText().trim().equals("") || this.locationField.getText().trim().equals("") || this.cuisineField.getText().trim().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter all required fields.");
             return;
         }
 
-        double ratingDouble;
-        try {
-            ratingDouble = Double.parseDouble(this.ratingField.getText());
+        if (!this.fromWantToVisit){
 
-            if (ratingDouble < 1 || ratingDouble > 5) throw new NumberFormatException();
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid rating.");
-            return;
+            double ratingDouble;
+            try {
+                ratingDouble = Double.parseDouble(this.ratingField.getText());
+
+                if (ratingDouble < 1 || ratingDouble > 5) throw new NumberFormatException();
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Please enter a valid rating.");
+                return;
+            }
+            //update visited
+            manager.updateRestaurant(restaurant,this.nameField.getText(), this.locationField.getText(),this.cuisineField.getText(),ratingDouble,this.reviewArea.getText());
+        }else{
+            //update want to visit
+            manager.updateRestaurant(restaurant, this.nameField.getText(), this.locationField.getText(),this.cuisineField.getText());
         }
-        restaurant.editName(this.nameField.getText());
-        restaurant.editLocation(this.locationField.getText());
-        restaurant.editCuisine(this.foodField.getText());
-        restaurant.editRating(ratingDouble);
-        restaurant.editReview(this.reviewArea.getText());
 
         dispose();
-
 
     }
     public void moveRestaurant(){
 
-        if (this.nameField.getText().trim().equals("") || this.locationField.getText().trim().equals("") || this.foodField.getText().trim().equals("")){
+        if (this.nameField.getText().trim().equals("") || this.locationField.getText().trim().equals("") || this.cuisineField.getText().trim().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter all required fields.");
             return;
         }
@@ -139,8 +141,9 @@ public class EditGUI extends JFrame{
             JOptionPane.showMessageDialog(this, "Please enter a valid rating.");
             return;
         }
-        restaurant.editRating(ratingDouble);
-        restaurant.editReview(this.reviewArea.getText());
+        
+        manager.updateRestaurant(restaurant,this.nameField.getText(), this.locationField.getText(),this.cuisineField.getText(),ratingDouble,this.reviewArea.getText());
+        
 
         manager.moveToVisited(this.restaurant);
         dispose();

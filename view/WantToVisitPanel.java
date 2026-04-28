@@ -45,7 +45,7 @@ public class WantToVisitPanel extends JPanel{
         searchBtn.addActionListener(e ->{
             String searchTerm = searchField.getText().toLowerCase();
             listModel.clear();
-            for (Restaurant r : this.manager.getVisited()) {
+            for (Restaurant r : this.manager.getWantToVisit()) {
                 if (searchTerm.isEmpty() || r.getName().toLowerCase().contains(searchTerm)) { //filters restaurants
                     listModel.addElement(r);
                 }
@@ -81,7 +81,7 @@ public class WantToVisitPanel extends JPanel{
                 return;
             }
 
-            new EditGUI(selected, manager, false);
+            new EditGUI(selected, manager, false, true);
             listModel.setElementAt(selected, restaurantList.getSelectedIndex());
             
         });
@@ -94,7 +94,7 @@ public class WantToVisitPanel extends JPanel{
                 return;
             }
 
-            new EditGUI(selected, manager, true);
+            new EditGUI(selected, manager, true, false);
             listModel.setElementAt(selected, restaurantList.getSelectedIndex());
            
         });

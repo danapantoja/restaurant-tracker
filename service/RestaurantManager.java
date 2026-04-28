@@ -41,5 +41,22 @@ public class RestaurantManager {
         this.deleteFromWantToVisit(_selected);
         this.addToVisited(_selected);
     }
+    public void updateRestaurant(Restaurant restaurant, String name, String location, String cuisine, double rating,
+            String review) {
+        restaurant.editName(name);
+        restaurant.editLocation(location);
+        restaurant.editCuisine(cuisine);
+        restaurant.editRating(rating);
+        restaurant.editReview(review);
+    
+        Collections.sort(this.visited);
+
+    }
+    public void updateRestaurant(Restaurant restaurant, String name, String location, String cuisine){
+        restaurant.editName(name);
+        restaurant.editLocation(location);
+        restaurant.editCuisine(cuisine);
+        Collections.sort(this.wantToVisit);
+    }
 
 }

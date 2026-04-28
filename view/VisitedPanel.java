@@ -79,7 +79,7 @@ public class VisitedPanel extends JPanel{
                 return;
             }
 
-            new EditGUI(selected, manager, false);
+            new EditGUI(selected, manager, false, false);
             listModel.setElementAt(selected, restaurantList.getSelectedIndex());
             
         });

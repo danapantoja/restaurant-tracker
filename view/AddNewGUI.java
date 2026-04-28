@@ -15,8 +15,8 @@ public class AddNewGUI extends JFrame{
     private JLabel nameLbl;
     private JTextField locationField;
     private JLabel locationLbl;
-    private JTextField foodField;
-    private JLabel foodLbl;
+    private JTextField cuisineField;
+    private JLabel cuisineLbl;
     private JTextField ratingField;
     private JLabel ratingLbl;
     private JTextArea reviewArea;
@@ -51,10 +51,10 @@ public class AddNewGUI extends JFrame{
         mainPanel.add(locationField);
 
         //add restaurant cuisine
-        foodLbl = new JLabel("Add Cuisine");
-        foodField = new JTextField();
-        mainPanel.add(foodLbl);
-        mainPanel.add(foodField);
+        cuisineLbl = new JLabel("Add Cuisine");
+        cuisineField = new JTextField();
+        mainPanel.add(cuisineLbl);
+        mainPanel.add(cuisineField);
 
         if(!this.wantToVisit){
             //add rating
@@ -96,17 +96,17 @@ public class AddNewGUI extends JFrame{
         setVisible(true);
 
     }
-    //add validation for name , location, food type
+    //add validation for name , location, cuisine type
     //use wantToVisit to add to specific list
     public void addRestaurant(){
 
 
-        if (this.nameField.getText().trim().equals("") || this.locationField.getText().trim().equals("") || this.foodField.getText().trim().equals("")){
+        if (this.nameField.getText().trim().equals("") || this.locationField.getText().trim().equals("") || this.cuisineField.getText().trim().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter all required fields.");
             return;
         }
         if (this.wantToVisit){ //add to want to visit
-            manager.addToWantToVisit( new Restaurant(this.nameField.getText(), this.locationField.getText(), this.foodField.getText()));
+            manager.addToWantToVisit( new Restaurant(this.nameField.getText(), this.locationField.getText(), this.cuisineField.getText()));
         }else{ //try to add to visited
 
             Double ratingDouble;
@@ -118,7 +118,7 @@ public class AddNewGUI extends JFrame{
                 JOptionPane.showMessageDialog(this, "Please enter a valid rating.");
                 return;
             }
-            Restaurant r = new Restaurant(this.nameField.getText(), this.locationField.getText(), this.foodField.getText());
+            Restaurant r = new Restaurant(this.nameField.getText(), this.locationField.getText(), this.cuisineField.getText());
             r.editRating(ratingDouble);
             r.editReview(this.reviewArea.getText());
             manager.addToVisited(r);

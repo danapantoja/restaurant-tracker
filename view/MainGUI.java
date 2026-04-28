@@ -1,5 +1,6 @@
 package view;
 import javax.swing.*;
+import java.awt.*;
 
 import service.RestaurantManager;
 
@@ -31,7 +32,6 @@ public class MainGUI extends JFrame{
 
 
         setVisible(true);
-
 
 
     }
