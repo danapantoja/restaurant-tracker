@@ -1,10 +1,6 @@
 package model;
 
 import java.io.Serializable;
-
-
-
-//import java.util;
  
 public class Restaurant implements Comparable<Restaurant>, Serializable {
 
