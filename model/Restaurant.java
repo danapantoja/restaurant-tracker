@@ -62,4 +62,8 @@ public class Restaurant implements Comparable<Restaurant>, Serializable {
         return this.name.compareTo(_res.name);
     }
 
+    public boolean containsIgnoreCase(String s) {
+        return this.name.toLowerCase().contains(s.toLowerCase());
+    }
+
 }
