@@ -46,11 +46,20 @@ public class VisitedPanel extends JPanel{
         searchBtn.addActionListener(e ->{
             String searchTerm = searchField.getText().toLowerCase();
             listModel.clear();
-            for (Restaurant r : this.manager.getVisited()) {
-                if (searchTerm.isEmpty() || r.getName().toLowerCase().contains(searchTerm)) { //filters restaurants
-                    listModel.addElement(r);
-                }
+
+            if (searchTerm.isBlank()){
+                for (Restaurant r : manager.getVisited()) {
+                listModel.addElement(r);
             }
+
+            }
+            else{
+                for (Restaurant r : this.manager.searchRestaurantVisited(searchTerm)) {
+                listModel.addElement(r);
+            }
+
+            }
+            
         });
 
         JPanel topPanel = new JPanel();
@@ -108,6 +117,7 @@ public class VisitedPanel extends JPanel{
 
 
     }
+    //deletes old list and adds updated list to display
     private void refreshList() {
         listModel.clear();
         this.searchField.setText("");

@@ -25,7 +25,7 @@ public class WantToVisitPanel extends JPanel{
         setLayout(new BorderLayout());
         //list of restaurants here scrollable (use restuaurant cell renderer)
         listModel = new DefaultListModel<>();
-        for (Restaurant r : manager.getVisited()) {
+        for (Restaurant r : manager.getWantToVisit()) {
             listModel.addElement(r);
         }
         restaurantList = new JList<>(listModel);
@@ -45,8 +45,13 @@ public class WantToVisitPanel extends JPanel{
         searchBtn.addActionListener(e ->{
             String searchTerm = searchField.getText().toLowerCase();
             listModel.clear();
-            for (Restaurant r : this.manager.getWantToVisit()) {
-                if (searchTerm.isEmpty() || r.getName().toLowerCase().contains(searchTerm)) { //filters restaurants
+            if (searchTerm.isBlank()){
+                for (Restaurant r : manager.getWantToVisit()) {
+                    listModel.addElement(r);
+                }
+            }
+            else{
+                for (Restaurant r : this.manager.searchRestaurantWantToVisit(searchTerm)) {
                     listModel.addElement(r);
                 }
             }

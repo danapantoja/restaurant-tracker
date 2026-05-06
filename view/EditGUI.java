@@ -22,7 +22,6 @@ public class EditGUI extends JFrame{
     private JLabel reviewLbl;
     private JButton backBtn;
     private JButton submitBtn;
-
     private Restaurant restaurant;
     private RestaurantManager manager;
 
@@ -144,7 +143,6 @@ public class EditGUI extends JFrame{
         
         manager.updateRestaurant(restaurant,this.nameField.getText(), this.locationField.getText(),this.cuisineField.getText(),ratingDouble,this.reviewArea.getText());
         
-
         manager.moveToVisited(this.restaurant);
         dispose();
     }

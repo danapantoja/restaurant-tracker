@@ -56,14 +56,12 @@ public class AddNewGUI extends JFrame{
         mainPanel.add(cuisineLbl);
         mainPanel.add(cuisineField);
 
-        if(!this.wantToVisit){
+        if(!this.wantToVisit){ //if in visited panel, add new gui has the option to add rating and review
             //add rating
             ratingLbl = new JLabel("Add Rating (1-5)");
             ratingField = new JTextField();
             mainPanel.add(ratingLbl);
             mainPanel.add(ratingField);
-
-
             // add review
             reviewLbl = new JLabel("Add Review");
             reviewArea = new JTextArea( 5, 20);
@@ -73,19 +71,17 @@ public class AddNewGUI extends JFrame{
             mainPanel.add(new JScrollPane(reviewArea));
 
         }
-
-        
         // submit 
         submitBtn = new JButton("Submit");
         submitBtn.addActionListener(e -> {
             addRestaurant();
         });
 
-        //back to main
+        //back to main button
         backBtn = new JButton("Back");
         backBtn.addActionListener(e -> dispose());
 
-        //bottom buttons
+        //bottom button panel 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 20, 20));
         buttonPanel.add(backBtn);

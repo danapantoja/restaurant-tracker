@@ -29,7 +29,7 @@ public class RestaurantManager {
         Collections.sort(this.wantToVisit);
         saveData();
     }
-
+    
     public ArrayList<Restaurant> getVisited(){
         return this.visited;
     }
@@ -52,7 +52,7 @@ public class RestaurantManager {
         saveData();
     }
 
-    public ArrayList<Restaurant> searchRestaurant(String _search) {
+    public ArrayList<Restaurant> searchRestaurantVisited(String _search) {
         ArrayList<Restaurant> results = new ArrayList<>();
 
         for (Restaurant _res : visited) {
@@ -61,14 +61,20 @@ public class RestaurantManager {
             }
         }
 
-        for (Restaurant _res : wantToVisit) {
-            if (_res.containsIgnoreCase(_search)) {
-                results.add(_res);
-            }
-        }
-
         Collections.sort(results);
         return results;
+    }
+
+    public ArrayList<Restaurant> searchRestaurantWantToVisit(String _search) {
+        ArrayList<Restaurant> results = new ArrayList<>();
+
+        for (Restaurant _res : wantToVisit) {
+                if (_res.containsIgnoreCase(_search)) {
+                    results.add(_res);
+                }
+            }
+        Collections.sort(results);
+            return results;
     }
 
     public void updateRestaurant(Restaurant _res, String name, String location, String cuisine, double rating,

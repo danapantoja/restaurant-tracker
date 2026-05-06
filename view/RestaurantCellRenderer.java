@@ -19,6 +19,8 @@ public class RestaurantCellRenderer extends JPanel implements ListCellRenderer<R
             BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY),
             BorderFactory.createEmptyBorder(10, 14, 10, 14)
         ));
+
+        //prettier format for each label
         nameLbl = new JLabel();
         nameLbl.setFont(new Font("Arial", Font.BOLD, 16));
 
@@ -32,27 +34,25 @@ public class RestaurantCellRenderer extends JPanel implements ListCellRenderer<R
         add(infoLbl);
         if (!this.wantToVisit) add(reviewLbl);
         
-
     }
     @Override
     public Component getListCellRendererComponent(JList<? extends Restaurant> list, Restaurant value, int index,
             boolean isSelected, boolean cellHasFocus) {
             nameLbl.setText(value.getName());
-            if (this.wantToVisit){
+            if (this.wantToVisit){ //prettier format
                 infoLbl.setText(value.getLocation() + " • " + value.getCuisine());
             }else{
                 infoLbl.setText(value.getLocation() + " • " + value.getCuisine() + " • Rating: "+ value.getRating() + "/5.0");
                 reviewLbl.setText("“"+value.getReview()+"“");
             }
-            
-
-
+            //prettier select color
             if (isSelected) {
                 setBackground(new Color(220, 235, 255));
             } else {
                 setBackground(Color.WHITE);
             }
 
+            //font color
             nameLbl.setForeground(Color.BLACK);
             infoLbl.setForeground(Color.DARK_GRAY);
             reviewLbl.setForeground(Color.GRAY);
